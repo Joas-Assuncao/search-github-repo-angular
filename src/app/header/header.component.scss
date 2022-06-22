@@ -1,0 +1,27 @@
+$background-header: #272B33;
+$color-svg: #BFC0C2;
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 100%;
+
+    padding: 1rem 2rem;
+
+    background: $background-header;
+
+    svg {
+        fill: $color-svg;
+
+        height: 32px;
+        width: 32px;
+    }
+}
+
+@media(max-width: 767.5px) {
+    header {
+        justify-content: center;
+    }
+}

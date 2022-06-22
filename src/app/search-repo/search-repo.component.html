@@ -1,0 +1,88 @@
+<main class="container">
+    <div class="container-input">
+        <input
+            type="text"
+            name="search"
+            id="search-field"
+            class="search-field"
+            placeholder="Pesquise um repositório"
+            [formControl]="inputQuerySearch"
+        />
+
+        <button class="search-button" [disabled]="!inputQuerySearch.value" (click)="onSearch()">
+            Pesquisar
+        </button>
+    </div>
+
+    <h3 *ngIf="total === 0" class="title">Pesquise um repo para ter informações!</h3>
+    <h3 *ngIf="total !== 0" class="title">{{ total }} resultados para esta pesquisa!</h3>
+    <section class="container-repo" *ngFor="let item of items | paginate: { itemsPerPage: 5, currentPage: p }">
+        <p>
+            <label>
+                Nome:
+            </label>
+            {{ item.name }}
+        </p>
+        <p>
+            <label>
+                Descrição:
+            </label>
+            {{ item.description }}
+        </p>
+        <p>
+            <label>
+                Site:
+            </label>
+            <a href="{{ item.homepage }}">{{ item.name }}</a>
+        </p>
+        <p>
+            <label>
+                Número de watchers:
+            </label>
+            {{ item.watchers_count }}
+        </p>
+        <p>
+            <label>
+                Número de estrelas:
+            </label>
+            {{ item.stargazers_count }}
+        </p>
+        <p class="topics">
+            <label>
+                Tópicos:
+            </label>
+            <span *ngFor="let topic of item.topics">{{ topic }}</span>
+        </p>
+        <p>
+            <label>
+                Número de forks:
+            </label>
+            {{ item.forks_count }}
+        </p>
+        <p>
+            <label>
+                Url para clone:
+            </label>
+            {{ item.clone_url }}
+        </p>
+        <p>
+            <label>
+                Link Github:
+            </label>
+            <a href="{{ item.html_url }}">Github {{ item.name }}</a>
+        </p>
+        <p>
+            <label>
+                Linguagem principal:
+            </label>
+            {{ item.language }}
+        </p>
+        <p>
+            <label>
+                Issues abertas:
+            </label>
+            {{ item.open_issues_count }}
+        </p>
+    </section>
+    <pagination-controls *ngIf="alreadyResearched" (pageChange)="p = $event"></pagination-controls>
+</main>
